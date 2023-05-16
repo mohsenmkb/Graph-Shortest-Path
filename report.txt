@@ -1,0 +1,71 @@
+2 Set Declarations
+    C3_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :   12 : {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+    x_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     2 :    Any :   24 : {('A', 'B'), ('A', 'K'), ('H', 'A'), ('J', 'A'), ('B', 'C'), ('B', 'G'), ('N', 'B'), ('C', 'D'), ('H', 'C'), ('D', 'E'), ('D', 'I'), ('N', 'D'), ('E', 'I'), ('E', 'F'), ('L', 'E'), ('F', 'G'), ('F', 'N'), ('M', 'F'), ('G', 'H'), ('H', 'L'), ('I', 'H'), ('I', 'J'), ('K', 'L'), ('L', 'M')}
+
+1 Var Declarations
+    x : Size=24, Index=x_index
+        Key        : Lower : Value : Upper : Fixed : Stale : Domain
+        ('A', 'B') :     0 :   0.0 :     1 : False : False : Binary
+        ('A', 'K') :     0 :   1.0 :     1 : False : False : Binary
+        ('B', 'C') :     0 :   0.0 :     1 : False : False : Binary
+        ('B', 'G') :     0 :   0.0 :     1 : False : False : Binary
+        ('C', 'D') :     0 :  -0.0 :     1 : False : False : Binary
+        ('D', 'E') :     0 :  -0.0 :     1 : False : False : Binary
+        ('D', 'I') :     0 :  -0.0 :     1 : False : False : Binary
+        ('E', 'F') :     0 :   0.0 :     1 : False : False : Binary
+        ('E', 'I') :     0 :  -0.0 :     1 : False : False : Binary
+        ('F', 'G') :     0 :  -0.0 :     1 : False : False : Binary
+        ('F', 'N') :     0 :  -0.0 :     1 : False : False : Binary
+        ('G', 'H') :     0 :  -0.0 :     1 : False : False : Binary
+        ('H', 'A') :     0 :  -0.0 :     1 : False : False : Binary
+        ('H', 'C') :     0 :  -0.0 :     1 : False : False : Binary
+        ('H', 'L') :     0 :  -0.0 :     1 : False : False : Binary
+        ('I', 'H') :     0 :  -0.0 :     1 : False : False : Binary
+        ('I', 'J') :     0 :  -0.0 :     1 : False : False : Binary
+        ('J', 'A') :     0 :   0.0 :     1 : False : False : Binary
+        ('K', 'L') :     0 :   1.0 :     1 : False : False : Binary
+        ('L', 'E') :     0 :  -0.0 :     1 : False : False : Binary
+        ('L', 'M') :     0 :   1.0 :     1 : False : False : Binary
+        ('M', 'F') :     0 :   1.0 :     1 : False : False : Binary
+        ('N', 'B') :     0 :  -0.0 :     1 : False : False : Binary
+        ('N', 'D') :     0 :  -0.0 :     1 : False : False : Binary
+
+1 Objective Declarations
+    obj : Size=1, Index=None, Active=True
+        Key  : Active : Sense    : Expression
+        None :   True : minimize : 2*x[A,B] + 4*x[A,K] + 4*x[H,A] + 4*x[J,A] + 3*x[B,C] + 2*x[B,G] + 4*x[N,B] + 2*x[C,D] + 3*x[H,C] + 4*x[D,E] + 4*x[D,I] + 4*x[N,D] + x[E,I] + 3*x[E,F] + 2*x[L,E] + x[F,G] + 4*x[F,N] + 2*x[M,F] + 4*x[G,H] + 4*x[H,L] + 3*x[I,H] + 4*x[I,J] + 4*x[K,L] + x[L,M]
+
+3 Constraint Declarations
+    C1 : Size=1, Index=None, Active=True
+        Key  : Lower : Body            : Upper : Active
+        None :   1.0 : x[A,B] + x[A,K] :   1.0 :   True
+    C2 : Size=1, Index=None, Active=True
+        Key  : Lower : Body            : Upper : Active
+        None :   1.0 : x[E,F] + x[M,F] :   1.0 :   True
+    C3 : Size=12, Index=C3_index, Active=True
+        Key : Lower : Body                                         : Upper : Active
+          1 :   0.0 :          x[D,E] + x[D,I] - (x[C,D] + x[N,D]) :   0.0 :   True
+          2 :   0.0 :                              x[J,A] - x[I,J] :   0.0 :   True
+          3 :   0.0 :                     x[N,B] + x[N,D] - x[F,N] :   0.0 :   True
+          4 :   0.0 :          x[B,C] + x[B,G] - (x[A,B] + x[N,B]) :   0.0 :   True
+          5 :   0.0 :          x[E,I] + x[E,F] - (x[D,E] + x[L,E]) :   0.0 :   True
+          6 :   0.0 : x[H,A] + x[H,C] + x[H,L] - (x[G,H] + x[I,H]) :   0.0 :   True
+          7 :   0.0 :                              x[K,L] - x[A,K] :   0.0 :   True
+          8 :   0.0 :                   x[G,H] - (x[B,G] + x[F,G]) :   0.0 :   True
+          9 :   0.0 :                   x[C,D] - (x[B,C] + x[H,C]) :   0.0 :   True
+         10 :   0.0 :                              x[M,F] - x[L,M] :   0.0 :   True
+         11 :   0.0 :          x[L,E] + x[L,M] - (x[H,L] + x[K,L]) :   0.0 :   True
+         12 :   0.0 :          x[I,H] + x[I,J] - (x[D,I] + x[E,I]) :   0.0 :   True
+
+7 Declarations: x_index x obj C1 C2 C3_index C3
+
+
+OF: 11.0
+Route activated: A-K
+Route activated: M-F
+Route activated: K-L
+Route activated: L-M
